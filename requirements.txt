@@ -5,10 +5,10 @@ pandas
 matplotlib
 python-dotenv
 yfinance
-numpy==1.23.5
-pmdarima==2.0.3
-statsmodels==0.14.0
-pip install tensorflow
+numpy#==1.23.5
+#pmdarima==2.0.3
+#statsmodels==0.14.0
+tensorflow
 scikit-learn
 joblib
 streamlit
