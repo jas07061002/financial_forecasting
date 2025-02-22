@@ -13,6 +13,7 @@ def run_prediction_script():
     try:
         # Dynamically locate real_time_predict.py
         script_path = os.path.join(os.path.dirname(__file__), "real_time_predict.py")
+        st.text(f"🔍 Looking for script at: {script_path}")
 
         # Check if the script exists
         if not os.path.exists(script_path):
@@ -23,7 +24,7 @@ def run_prediction_script():
          # Run the script (suppress TensorFlow logs)
         with open(os.devnull, "w") as devnull:
             result = subprocess.run(
-                ["python", script_path], 
+                ["python3", script_path], 
                 check=True, 
                 stdout=devnull,  # Suppress standard output
                 stderr=devnull   # Suppress error output

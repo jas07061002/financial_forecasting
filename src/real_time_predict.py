@@ -4,6 +4,7 @@ import numpy as np
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 from datetime import datetime, timedelta
+import os
 
 # Load trained LSTM model
 model = tf.keras.models.load_model("advanced_fine_tuned_lstm.h5")
@@ -53,7 +54,8 @@ prediction_df = pd.DataFrame({
     "LSTM_Forecast": future_prices
 })
 prediction_df.set_index("Date", inplace=True)
-prediction_df.to_csv("real_time_predictions.csv")
+prediction_file = os.path.join(os.path.dirname(__file__), "real_time_predictions.csv")
+prediction_df.to_csv(prediction_file)
 
 # Print the predictions
 print("🔮 **10-Day S&P 500 Forecast:**")
