@@ -11,7 +11,15 @@ print(f"✅ Running Python Version: {sys.version}")
 print(f"✅ Current Working Directory: {os.getcwd()}")
 print(f"✅ Available Files: {os.listdir('.')}")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get script's location
+# Ensure yfinance is installed
+try:
+    import yfinance as yf
+except ModuleNotFoundError:
+    print("⚠️ `yfinance` not found! Installing now...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "yfinance"])
+    import yfinance as yf  # Retry import after installation
 
+print("✅ `yfinance` is installed successfully!")
 # Load trained LSTM model
 model = tf.keras.models.load_model("advanced_fine_tuned_lstm.h5")
 
