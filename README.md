@@ -18,14 +18,14 @@ This project focuses on **predicting financial trends** using **time-series fore
 
 ## Project Structure
 ```
-
-├── data_load.py           # Data loading from yahoo finance
-├── data_preprocessing.py  # Data Cleaning & Feature Engineering
-├── train_arima.py         # ARIMA Implementation
-├── train_lstm_.py          # LSTM Implementation
-├── evaluate_models.py          # Model Evaluation & Metrics
-├── forecasting.py         # Forecasting Future Trends
-app.py              # Streamlit for Deployment
+├── src/                       # Source Code
+│   ├── data_load.py           # Data loading from yahoo finance
+│   ├── data_preprocessing.py  # Data Cleaning & Feature Engineering
+│   ├── train_arima.py         # ARIMA Implementation
+│   ├── train_lstm_.py         # LSTM Implementation
+│   ├── evaluate_models.py     # Model Evaluation & Metrics
+│   ├── forecasting.py         # Forecasting Future Trends
+│   ├── app.py                 # Streamlit for Deployment
 requirements.txt    # Dependencies
 README.md           # Project Documentation
 ```
