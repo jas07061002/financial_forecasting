@@ -3,7 +3,7 @@ from statsmodels.tsa.arima.model import ARIMA
 from pmdarima import auto_arima
 import joblib
 
-df = pd.read_csv("S&P500_cleaned.csv", index_col="Date", parse_dates=True)
+df = pd.read_csv("../S&P500_cleaned.csv", index_col="Date", parse_dates=True)
 
 # Auto-select best ARIMA parameters
 auto_arima_model = auto_arima(df["Close"], seasonal=False)
@@ -15,5 +15,5 @@ arima_fitted = arima_model.fit()
 
 # Save model
 
-joblib.dump(arima_fitted, "arima_model.pkl")
+joblib.dump(arima_fitted, "../arima_model.pkl")
 print("ARIMA Model Trained & Saved!")

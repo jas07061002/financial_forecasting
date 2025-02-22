@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load CSV file (skip first extra row)
-df = pd.read_csv("S&P500_data.csv", skiprows=2, index_col="Date", parse_dates=True)
+df = pd.read_csv("../S&P500_data.csv", skiprows=2, index_col="Date", parse_dates=True)
 
 # Rename columns (Remove Ticker row)
 df.columns = ["Close", "High", "Low", "Open", "Volume"]
@@ -39,5 +39,5 @@ df["RSI"] = 100 - (100 / (1 + rs))
 df.dropna(inplace=True)
 
 # Save cleaned data
-df.to_csv("S&P500_cleaned.csv")
+df.to_csv("../S&P500_cleaned.csv")
 print("Cleaned and preprocessed S&P 500 data saved!")

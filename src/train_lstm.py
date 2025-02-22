@@ -7,7 +7,7 @@ from tensorflow.keras.optimizers import Adam, RMSprop
 from sklearn.preprocessing import MinMaxScaler
 
 # Load cleaned S&P 500 data
-df = pd.read_csv("S&P500_cleaned.csv", index_col="Date", parse_dates=True)
+df = pd.read_csv("../S&P500_cleaned.csv", index_col="Date", parse_dates=True)
 
 # Scale data
 scaler = MinMaxScaler(feature_range=(0,1))
@@ -53,5 +53,5 @@ model.compile(optimizer=optimizer, loss="mean_squared_error")
 model.fit(X_train, y_train, batch_size=32, epochs=150, callbacks=[lr_scheduler, early_stopping])
 
 # Save Fine-Tuned Model
-model.save("advanced_fine_tuned_lstm.h5")
+model.save("../advanced_fine_tuned_lstm.h5")
 print("Advanced Fine-Tuned LSTM Model Trained & Saved!")

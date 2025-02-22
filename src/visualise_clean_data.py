@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Load CSV file (skip first extra row)
-df = pd.read_csv("S&P500_cleaned.csv", index_col="Date", parse_dates=True)
+df = pd.read_csv("financial_forecasting/S&P500_cleaned.csv", index_col="Date", parse_dates=True)
 
 # Display first few rows
 print(df.head())
