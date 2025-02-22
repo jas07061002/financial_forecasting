@@ -12,10 +12,24 @@ st.title("📈 Real-Time 10-Day S&P 500 Forecasting Dashboard")
 # Ensure the script runs in the correct directory
 def run_prediction_script():
     try:
-        result = subprocess.run(["python", "real_time_predict.py"], check=True, capture_output=True, text=True, cwd=os.path.dirname(__file__))
+        # Ensure the correct path for real_time_predict.py
+        script_path = os.path.join(os.getcwd(), "real_time_predict.py")
+        # Check if the file exists
+        if not os.path.exists(script_path):
+            st.error(f"❌ Error: Script not found at {script_path}")
+            return
+        # Suppress TensorFlow logs by redirecting stdout and stderr to /dev/null
+        with open(os.devnull, "w") as devnull:
+            result = subprocess.run(
+                ["python", script_path], 
+                check=True, 
+                stdout=devnull,  # Suppress standard output
+                stderr=devnull   # Suppress error output
+            )
         st.success("✅ Prediction updated successfully!")
         st.text(result.stdout)  # Show script output in Streamlit
-        st.rerun()   # Refresh Streamlit UI to load new predictions
+        # Refresh Streamlit UI after running script
+        st.session_state["prediction_updated"] = True  
     except subprocess.CalledProcessError as e:
         st.error(f"❌ Error running script: {e}")
         st.text(e.stderr)  # Show error details
