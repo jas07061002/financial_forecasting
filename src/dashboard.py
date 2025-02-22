@@ -46,6 +46,3 @@ try:
 
 except FileNotFoundError:
     st.error("No prediction file found. Run `real_time_predict.py` first.")
-
-if __name__ == "__main__":
-    predict_next_10_days()

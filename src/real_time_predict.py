@@ -25,6 +25,7 @@ def fetch_real_time_data():
 
 # Function to predict the next 10 days' prices
 def predict_next_10_days():
+    print("✅ `predict_next_10_days` function exists and is callable!")
     df = fetch_real_time_data()
 
     # Normalize data
@@ -62,6 +63,9 @@ def predict_next_10_days():
     print(prediction_df)
     print("✅ Forecast saved successfully!")
 
-
 # Print the predictions
 print("🔮 **10-Day S&P 500 Forecast:**")
+
+if __name__ == "__main__":
+    predict_next_10_days()
+
