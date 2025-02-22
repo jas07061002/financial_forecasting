@@ -12,12 +12,17 @@ print(f"✅ Current Working Directory: {os.getcwd()}")
 print(f"✅ Available Files: {os.listdir('.')}")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get script's location
 # Ensure yfinance is installed
+import subprocess
+import sys
+
+# Force reinstall `yfinance`
 try:
     import yfinance as yf
 except ModuleNotFoundError:
-    print("⚠️ `yfinance` not found! Installing now...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "yfinance"])
-    import yfinance as yf  # Retry import after installation
+    print("⚠️ `yfinance` not found! Reinstalling now...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--no-cache-dir", "yfinance"])
+    import yfinance as yf  # Retry import
+
 
 print("✅ `yfinance` is installed successfully!")
 # Load trained LSTM model
