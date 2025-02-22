@@ -66,7 +66,7 @@ try:
     st.dataframe(future_predictions)
 
     # Plot the forecast
-    plt.figure(figsize=(12,6))
+    plt.figure(figsize=(10,5))
     plt.plot(future_predictions.index, future_predictions["LSTM_Forecast"], marker="o", linestyle="dashed", color="green", label="LSTM Prediction")
     plt.xlabel("Date")
     plt.ylabel("Predicted Close Price (USD)")
