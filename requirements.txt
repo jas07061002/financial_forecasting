@@ -5,7 +5,8 @@ pandas
 matplotlib
 python-dotenv
 yfinance
-numpy#==1.23.5
+numpy
+#==1.23.5
 #pmdarima==2.0.3
 #statsmodels==0.14.0
 tensorflow
