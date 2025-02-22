@@ -1,0 +1,11 @@
+#python3.11 -m venv ml-env ## create env
+# # Activate the virtual environment
+pip install requests pandas matplotlib
+pip install python-dotenv
+pip install yfinance
+pip install statsmodels pmdarima
+pip install pmdarima
+pip install --no-cache-dir "numpy==1.23.5" "pmdarima==2.0.3" "statsmodels==0.14.0"
+pip install tensorflow
+pip install scikit-learn joblib
+
