@@ -13,7 +13,8 @@ print(f"✅ Available Files: {os.listdir('.')}")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get script's location
 
 # Load trained LSTM model
-model = tf.keras.models.load_model("advanced_fine_tuned_lstm.h5")
+model_path = os.path.join(BASE_DIR, "advanced_fine_tuned_lstm.h5")
+model = tf.keras.models.load_model(model_path)
 
 # Function to fetch real-time S&P 500 data
 def fetch_real_time_data():
