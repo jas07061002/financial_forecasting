@@ -22,13 +22,14 @@ def run_prediction_script():
         
         # Run the script and capture error logs
          # Run the script (suppress TensorFlow logs)
-        with open(os.devnull, "w") as devnull:
-            result = subprocess.run(
-                ["python3", script_path], 
-                check=True, 
-                stdout=devnull,  # Suppress standard output
-                stderr=devnull   # Suppress error output
-            )
+        # with open(os.devnull, "w") as devnull:
+        #     result = subprocess.run(
+        #         ["python3", script_path], 
+        #         check=True, 
+        #         stdout=devnull,  # Suppress standard output
+        #         stderr=devnull   # Suppress error output
+        #     )
+        result = subprocess.run(["python", script_path], check=True, capture_output=True, text=True)
 
         st.success("✅ Prediction updated successfully!")
         st.text(result.stdout)  # Show script output
