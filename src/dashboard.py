@@ -6,57 +6,24 @@ import time
 import subprocess
 import threading
 import os
+from real_time_predict import predict_next_10_days
+
 
 st.title("📈 Real-Time 10-Day S&P 500 Forecasting Dashboard")
 
-def run_prediction_script():
+def run_prediction():
     try:
-        # Dynamically locate real_time_predict.py
-        script_path = os.path.join(os.path.dirname(__file__), "real_time_predict.py")
-        st.text(f"🔍 Looking for script at: {script_path}")
-
-        # Check if the script exists
-        if not os.path.exists(script_path):
-            st.error(f"❌ Error: Script not found at {script_path}")
-            return
-        
-        # Run the script and capture error logs
-         # Run the script (suppress TensorFlow logs)
-        # with open(os.devnull, "w") as devnull:
-        #     result = subprocess.run(
-        #         ["python3", script_path], 
-        #         check=True, 
-        #         stdout=devnull,  # Suppress standard output
-        #         stderr=devnull   # Suppress error output
-        #     )
-        result = subprocess.run(["python", script_path], check=True, capture_output=True, text=True)
-
+        predict_next_10_days()  # Run function instead of subprocess
         st.success("✅ Prediction updated successfully!")
-        st.text(result.stdout)  # Show script output
         st.session_state["prediction_updated"] = True  # Refresh Streamlit UI
 
-    except subprocess.CalledProcessError as e:
-        st.error(f"❌ Error running script: {e}")
-        st.text(e.stderr)  # Show full error details
+    except Exception as e:
+        st.error(f"❌ Error: {e}")
 
-
-# Schedule the script to run every day at 6 AM (Only one scheduler runs)
-if "scheduler_initialized" not in st.session_state:
-    st.session_state.scheduler_initialized = True  # Prevent multiple schedulers
-    schedule.every().day.at("06:00").do(run_prediction_script)
-
-    def schedule_runner():
-        while True:
-            schedule.run_pending()
-            time.sleep(60)  # Check every 60 seconds
-
-    # Start the scheduler in a separate thread
-    thread = threading.Thread(target=schedule_runner, daemon=True)
-    thread.start()
 
 # Button to manually trigger prediction update
 if st.button("🔄 Run Prediction Now"):
-    run_prediction_script()
+    run_prediction()
 
 # Load latest 10-day prediction
 try:
@@ -80,4 +47,5 @@ try:
 except FileNotFoundError:
     st.error("No prediction file found. Run `real_time_predict.py` first.")
 
-st.write("🚀 This prediction updates automatically every day at 6 AM.")
+if __name__ == "__main__":
+    predict_next_10_days()

@@ -1,3 +1,4 @@
 .env
 /ml-env
 app.log
+src/__pycache__

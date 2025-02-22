@@ -11,20 +11,7 @@ print(f"✅ Running Python Version: {sys.version}")
 print(f"✅ Current Working Directory: {os.getcwd()}")
 print(f"✅ Available Files: {os.listdir('.')}")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Get script's location
-# Ensure yfinance is installed
-import subprocess
-import sys
 
-# Force reinstall `yfinance`
-try:
-    import yfinance as yf
-except ModuleNotFoundError:
-    print("⚠️ `yfinance` not found! Reinstalling now...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--no-cache-dir", "yfinance"])
-    import yfinance as yf  # Retry import
-
-
-print("✅ `yfinance` is installed successfully!")
 # Load trained LSTM model
 model = tf.keras.models.load_model("advanced_fine_tuned_lstm.h5")
 
@@ -59,25 +46,22 @@ def predict_next_10_days():
     # Convert predictions back to original scale
     future_forecast = scaler.inverse_transform(np.array(future_forecast).reshape(-1,1)).flatten()
 
-    return future_forecast
-
-# Get real-time 10-day prediction
-future_prices = predict_next_10_days()
-
-# Generate future dates for the next 10 days
-future_dates = [datetime.now() + timedelta(days=i) for i in range(1, 11)]
-
-# Save predictions dynamically
-prediction_df = pd.DataFrame({
+     # Create a DataFrame with future dates
+    future_dates = [datetime.now() + timedelta(days=i) for i in range(1, 11)]
+    # Save predictions dynamically
+    prediction_df = pd.DataFrame({
     "Date": future_dates,
-    "LSTM_Forecast": future_prices
-})
-prediction_df.set_index("Date", inplace=True)
-#prediction_file = os.path.join(os.path.dirname(__file__), "real_time_predictions.csv")
-csv_path = os.path.join(BASE_DIR, "real_time_predictions.csv")
-print(f"✅ Saving predictions to: {csv_path}")
-prediction_df.to_csv(csv_path)
+    "LSTM_Forecast": future_forecast
+    })
+    
+    prediction_df.set_index("Date", inplace=True)
+    #prediction_file = os.path.join(os.path.dirname(__file__), "real_time_predictions.csv")
+    csv_path = os.path.join(BASE_DIR, "real_time_predictions.csv")
+    print(f"✅ Saving predictions to: {csv_path}")
+    prediction_df.to_csv(csv_path)
+    print(prediction_df)
+    print("✅ Forecast saved successfully!")
+
 
 # Print the predictions
 print("🔮 **10-Day S&P 500 Forecast:**")
-print(prediction_df)
